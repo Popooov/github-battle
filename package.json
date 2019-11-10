@@ -17,6 +17,7 @@
       "@babel/plugin-proposal-class-properties"
     ]
   },
+  "homepage": "/",
   "author": "",
   "license": "ISC",
   "dependencies": {
