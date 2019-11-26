@@ -99,7 +99,6 @@ export default function Results({ location }) {
     }
 
     if(error) {
-        console.log(error)
         return (
             <p className='center-text error'>{error}</p>
         )
