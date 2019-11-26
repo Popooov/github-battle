@@ -83,64 +83,49 @@ ReposGrid.propTypes = {
     repos: PropTypes.array.isRequired
 }
 
-export default class Popular extends Component {
-
-    state = {
-        selectedLanguage: 'All',
-        repos: {},
-        error: null
-    }
-
-    componentDidMount() {
-        this.updateLanguage(this.state.selectedLanguage)
-    }
-
-    updateLanguage = (selectedLanguage) => {
-        this.setState({
-            selectedLanguage,
-            error: null,
-        })
-
-        if(!this.state.repos[selectedLanguage]) {
-            fetchPopularRepos(selectedLanguage)
-                .then((data) => {
-                    this.setState(({ repos }) => ({
-                        repos: {
-                            ...repos,
-                            [selectedLanguage]: data
-                        }
-                    }))
-                })
-                .catch(() => {
-                    console.warn('Error fetching repos: ', error)
-
-                    this.setState({
-                        error: 'There was an error fetching the repositories.'
-                    })
-                })
+function popularReducer(state, accion) {
+    if(accion.type === 'success') {
+        return {
+            ...state,
+            [accion.selectedLanguage]: accion.repos
         }
+    } else if(accion.type === 'error') {
+        return {
+            ...state,
+            error: accion.error
+        }
+    } else {
+        throw new Error('Incorrect accion type')
     }
+}
 
-    isLoading = () => {
-        const { selectedLanguage, repos, error } = this.state
+export default function Popular() {
 
-        return !repos[selectedLanguage] && error === null
-    }
+    const [selectedLanguage, setSelectedLanguage] = React.useState('All')
+    const [state, dispatch] = React.useReducer(popularReducer, { error: null })
+    const fetchedLanguages = React.useRef([])
 
-    render() {
+    React.useEffect(() => {
+        if(fetchedLanguages.current.includes(selectedLanguage) === false) {
+            fetchedLanguages.current.push(selectedLanguage)
 
-        const { selectedLanguage, repos, error } = this.state
+            fetchPopularRepos(selectedLanguage)
+                .then((repos) => dispatch({type: 'success', repos, selectedLanguage}))
+                .catch((error) => dispatch({type: 'error', error}))
+        }
+    },[fetchedLanguages, selectedLanguage])
 
-        return(
-            <Fragment>
-                <LanguagesNav 
-                    selected={selectedLanguage}
-                    onUpdateLanguage={this.updateLanguage}
-                />
-                {this.isLoading() && <Loading text='Fetching Repos' />}
-                {error && <p className='center-text error'>{error}</p>}
-                {repos[selectedLanguage] && <ReposGrid repos={repos[selectedLanguage]} />}
-            </Fragment>
-        )
-    }
+    const isLoading = () => !state[selectedLanguage] && state.error === null
+
+    return(
+        <Fragment>
+            <LanguagesNav 
+                selected={selectedLanguage}
+                onUpdateLanguage={setSelectedLanguage}
+            />
+            {isLoading() && <Loading text='Fetching Repos' />}
+            {state.error && <p className='center-text error'>{state.error}</p>}
+            {state[selectedLanguage] && <ReposGrid repos={state[selectedLanguage]} />}
+        </Fragment>
+    )
 }
