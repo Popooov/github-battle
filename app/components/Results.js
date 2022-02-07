@@ -119,7 +119,7 @@ export default function Results({ location }) {
                 <Card
                     header={winner.score === loser.score ? 'Tie' : 'Loser'}
                     avatar={loser.profile.avatar_url}
-                    subheader={loser.score.toLocaleString()}
+                    subheader={`Score: ${winner.score.toLocaleString()}`}
                     href={loser.profile.html_url}
                     name={loser.profile.login}
                 >
