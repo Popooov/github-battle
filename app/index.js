@@ -1,18 +1,18 @@
-import React from 'react'
 import ReactDOM from 'react-dom'
+import { useState, lazy } from 'react'
 import './index.css'
 import { ThemeProvider } from './contexts/theme'
 import Nav from './components/Nav'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Loading from './components/Loading'
 
-const Popular = React.lazy(() => import('./components/Popular'))
-const Battle = React.lazy(() => import('./components/Battle'))
-const Results = React.lazy(() => import('./components/Results'))
+const Popular = lazy(() => import('./components/Popular'))
+const Battle = lazy(() => import('./components/Battle'))
+const Results = lazy(() => import('./components/Results'))
 
 function App() {
     
-    const [theme, setTheme] = React.useState('light')
+    const [theme, setTheme] = useState('light')
     const toggleTheme = () => setTheme((t) => t === 'light' ? 'dark' : 'light')
 
     return (
