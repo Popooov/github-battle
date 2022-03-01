@@ -1,4 +1,4 @@
-import React from 'react'
+import { useContext, useState } from 'react'
 import { FaUserFriends, FaFighterJet, FaTrophy, FaTimesCircle } from 'react-icons/fa'
 import PropTypes from 'prop-types'
 import ThemeContext from '../contexts/theme'
@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 function Instructions() {
 
-    const theme = React.useContext(ThemeContext)
+    const theme = useContext(ThemeContext)
 
     return (
         <div className='instructions-container'>
@@ -39,8 +39,8 @@ function Instructions() {
 
 function PlayerInput({ onSubmit, label }) {
 
-    const theme = React.useContext(ThemeContext)
-    const [username, setUsername] = React.useState('')
+    const theme = useContext(ThemeContext)
+    const [username, setUsername] = useState('')
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -84,7 +84,7 @@ PlayerInput.propTypes = {
 
 function PlayerPreview({ username, onReset, label }) {
 
-    const theme = React.useContext(ThemeContext)
+    const theme = useContext(ThemeContext)
 
     return (
         <div className='column player'>
@@ -119,8 +119,8 @@ PlayerPreview.propTypes = {
 
 export default function Battle() {
 
-    const [playerOne, setPlayerOne] = React.useState(null)
-    const [playerTwo, setPlayerTwo] = React.useState(null)
+    const [playerOne, setPlayerOne] = useState(null)
+    const [playerTwo, setPlayerTwo] = useState(null)
 
     const handleSubmit = (id, player) => {
         return id === 'playerOne'
@@ -135,7 +135,7 @@ export default function Battle() {
     }
 
     return (
-        <React.Fragment>
+        <>
             <Instructions />
             <div className='players-container'>
                 <h1 className='center-text header-lg'>Players</h1>
@@ -175,85 +175,6 @@ export default function Battle() {
                     </Link>
                 )}
             </div>
-        </React.Fragment>
+        </>
     )
 }
-
-// function playerReducer(state, player) {
-//     if(player.reset === 'reset') {
-//         return {
-//             ...state,
-//             [player.id]: null
-//         }
-//     } else if(player.id === 'playerOne') {
-//         return {
-//             ...state,
-//             [player.id]: player.name
-//         }
-//     } else if(player.id === 'playerTwo') {
-//         return {
-//             ...state,
-//             [player.id]: player.name
-//         }
-//     } else {
-//         throw new Error('Something went wrong!')
-//     }
-// }
-
-// export default function Battle() {
-    
-//     const [state, dispatch] = React.useReducer(playerReducer, {
-//         playerOne: null,
-//         playerTwo: null,
-//     }) 
-
-//     const handleSubmit = (id, player) => dispatch({id, name: player})
-
-//     const handleReset = (id) => dispatch({id, reset: 'reset'})
-
-//     const { playerOne, playerTwo } = state
-
-//     return (
-//         <React.Fragment>
-//             <Instructions />
-//             <div className='players-container'>
-//                 <h1 className='center-text header-lg'>Players</h1>
-//                 <div className='row space-around'>
-//                     {playerOne === null 
-//                         ?   <PlayerInput
-//                                 label='Player One'
-//                                 onSubmit={(player) => handleSubmit('playerOne', player)}
-//                             />
-//                         :   <PlayerPreview
-//                                 username={playerOne}
-//                                 label='Player One'
-//                                 onReset={() => handleReset('playerOne')}
-//                             />
-//                     }
-
-//                     {playerTwo === null
-//                         ?   <PlayerInput
-//                                 label='Player Two'
-//                                 onSubmit={(player) => handleSubmit('playerTwo', player)}
-//                             />
-//                         :   <PlayerPreview
-//                                 username={playerTwo}
-//                                 label='Player Two'
-//                                 onReset={() => handleReset('playerTwo')}
-//                             />
-//                     }
-//                 </div>
-//                 {playerOne && playerTwo && (
-//                     <Link
-//                         className='btn dark-btn btn-space'
-//                         to={{
-//                             pathname: '/battle/results',
-//                             search: `?playerOne=${playerOne}&playerTwo=${playerTwo}`
-//                         }}>
-//                             Battle
-//                     </Link>
-//                 )}
-//             </div>
-//         </React.Fragment>
-//     )
-// }

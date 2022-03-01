@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import { useState, useEffect, useReducer, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { fetchPopularRepos } from '../utils/api'
 import { FaUser, FaStar, FaCodeBranch,  FaExclamationTriangle } from 'react-icons/fa'
@@ -101,11 +101,11 @@ function popularReducer(state, accion) {
 
 export default function Popular() {
 
-    const [selectedLanguage, setSelectedLanguage] = React.useState('All')
-    const [state, dispatch] = React.useReducer(popularReducer, { error: null })
-    const fetchedLanguages = React.useRef([])
+    const [selectedLanguage, setSelectedLanguage] = useState('All')
+    const [state, dispatch] = useReducer(popularReducer, { error: null })
+    const fetchedLanguages = useRef([])
 
-    React.useEffect(() => {
+    useEffect(() => {
         if(fetchedLanguages.current.includes(selectedLanguage) === false) {
             fetchedLanguages.current.push(selectedLanguage)
 
@@ -118,7 +118,7 @@ export default function Popular() {
     const isLoading = () => !state[selectedLanguage] && state.error === null
 
     return(
-        <Fragment>
+        <>
             <LanguagesNav 
                 selected={selectedLanguage}
                 onUpdateLanguage={setSelectedLanguage}
@@ -126,6 +126,6 @@ export default function Popular() {
             {isLoading() && <Loading text='Fetching Repos' />}
             {state.error && <p className='center-text error'>{state.error}</p>}
             {state[selectedLanguage] && <ReposGrid repos={state[selectedLanguage]} />}
-        </Fragment>
+        </>
     )
 }

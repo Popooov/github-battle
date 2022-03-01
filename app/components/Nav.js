@@ -1,4 +1,4 @@
-import React from 'react'
+import { useContext } from 'react'
 import ThemeContext from '../contexts/theme'
 import { NavLink } from 'react-router-dom'
 
@@ -8,7 +8,7 @@ const activeStyle = {
 
 export default function Nav ({ toggleTheme }) {
 
-    const theme = React.useContext(ThemeContext)
+    const theme = useContext(ThemeContext)
 
     return (
         <nav className='row space-between'>

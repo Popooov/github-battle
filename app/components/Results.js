@@ -1,4 +1,4 @@
-import React from 'react'
+import { useReducer, useEffect } from 'react'
 import { battle } from '../utils/api'
 import { FaCompass, FaBriefcase, FaUsers, FaUserFriends, FaCode, FaUser } from 'react-icons/fa'
 import Card from './Card'
@@ -79,14 +79,14 @@ function battleReducer(state, accion) {
 export default function Results({ location }) {
 
     const { playerOne, playerTwo } = queryString.parse(location.search)
-    const [state, dispatch] = React.useReducer(battleReducer, {
+    const [state, dispatch] = useReducer(battleReducer, {
         winner: null,
         loser: null,
         error: null,
         loading: true
     })
 
-    React.useEffect(() => {
+    useEffect(() => {
         battle([playerOne, playerTwo])
             .then((players) => dispatch({type: 'success', player: players}))
             .catch(({ message }) => dispatch({type: 'error', message}))
@@ -105,7 +105,7 @@ export default function Results({ location }) {
     }
 
     return (
-        <React.Fragment>
+        <>
             <div className='grid space-around container-sm'>
                 <Card
                     header={winner.score === loser.score ? 'Tie' : 'Winner'}
@@ -132,6 +132,6 @@ export default function Results({ location }) {
             >
                 Reset
             </Link>
-        </React.Fragment>
+        </>
     )
 }

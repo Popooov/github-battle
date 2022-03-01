@@ -1,10 +1,10 @@
-import React from 'react'
+import { useContext } from 'react'
 import PropTypes from 'prop-types'
 import ThemeContext from '../contexts/theme'
 
 export default function Card({ header, subheader, avatar, href, name, children }) {
 
-    const theme = React.useContext(ThemeContext)
+    const theme = useContext(ThemeContext)
 
     return (
         <div className={`card bg-${theme}`}>
