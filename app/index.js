@@ -1,5 +1,5 @@
 import './index.css'
-import * as ReactDOM from 'react-dom'
+import { render } from 'react-dom'
 import { useState, lazy, Suspense, StrictMode } from 'react'
 import { ThemeProvider } from './contexts/theme'
 import Nav from './components/Nav'
@@ -37,7 +37,7 @@ function App() {
     )
 }
 
-ReactDOM.render(
+render(
     <StrictMode>
         <App />
     </StrictMode>,
