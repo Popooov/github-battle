@@ -166,7 +166,6 @@ li {
 .row {
   display: flex;
   flex-direction: row;
-  
 }
 
 .player {
@@ -273,4 +272,18 @@ li {
 .light-btn:disabled {
   background: #292929;
   color: #4a4a4a;
+}
+
+@media (min-width: 300px) {
+  .container {
+    padding: 5px 20px;
+  }
+
+  .battle-instructions li {
+    min-width: unset;
+  }
+  
+  .row {
+    flex-direction: column;
+  }
 }
