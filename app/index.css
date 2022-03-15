@@ -283,7 +283,15 @@ li {
     min-width: unset;
   }
   
-  .row {
+  .players-container .row {
+    display: flex;
     flex-direction: column;
+  }
+
+  .player-label,
+  .player-inputs input,
+  .player-inputs button {
+    margin-bottom: 15px;
+    text-align: center;
   }
 }
