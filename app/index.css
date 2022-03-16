@@ -274,9 +274,13 @@ li {
   color: #4a4a4a;
 }
 
-@media (min-width: 300px) {
+@media (max-width: 400px) {
   .container {
     padding: 5px 20px;
+  }
+
+  .nav-link {
+    font-size: .85rem;
   }
 
   .battle-instructions li {
@@ -284,7 +288,7 @@ li {
   }
   
   .players-container .row {
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
   }
 
