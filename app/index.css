@@ -288,8 +288,15 @@ li {
   }
   
   .players-container .row {
-    /* display: flex; */
     flex-direction: column;
+  }
+
+  .player-info {
+    flex-direction: column;
+  }
+
+  .player-info .link {
+    margin-left: 0;
   }
 
   .player-label,
@@ -297,5 +304,9 @@ li {
   .player-inputs button {
     margin-bottom: 15px;
     text-align: center;
+  }
+
+  .player-inputs button {
+    margin: 0 auto;
   }
 }
