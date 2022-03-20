@@ -39,11 +39,22 @@ li {
   background: transparent;
 }
 
-.nav-link {
+.nav-link,
+.lang-nav-link,
+.nav-link-dark,
+.nav-link-light {
   font-size: 18px;
   font-weight: bold;
   text-decoration: none;
   color: inherit;
+}
+
+.nav-link-dark {
+  color: #DADADA;
+}
+
+.nav-link-light {
+  color: #000;
 }
 
 .nav li {

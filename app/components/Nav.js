@@ -17,7 +17,7 @@ export default function Nav ({ toggleTheme }) {
                     <NavLink 
                         exact to='/' 
                         activeStyle={activeStyle} 
-                        className='nav-link'>
+                        className={`nav-link-${theme}`}>
                             Popular
                     </NavLink>
                 </li>
@@ -25,7 +25,7 @@ export default function Nav ({ toggleTheme }) {
                     <NavLink 
                         to='/battle' 
                         activeStyle={activeStyle} 
-                        className='nav-link'>
+                        className={`nav-link-${theme}`}>
                             Battle
                     </NavLink>
                 </li>
