@@ -167,10 +167,11 @@ li {
 
 .battle-instructions li {
   flex: 1;
-  min-width: 300px;
+  min-width: 250px;
 }
 
 .battle-instructions svg {
+  box-sizing: unset;
   padding: 40px;
   border-radius: 3px;
 }
