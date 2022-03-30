@@ -45,6 +45,12 @@ li {
   background: transparent;
 }
 
+.btn-theme-toggle {
+  position: relative;
+  padding: 0;
+  left: 4px;
+}
+
 .nav-link,
 .lang-nav-link,
 .nav-link-dark,
