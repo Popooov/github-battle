@@ -1,8 +1,8 @@
-*, 
+/* *, 
 *::before,
 *::after {
   box-sizing: border-box;
-}
+} */
 
 html, body, #app {
     margin: 0;
@@ -142,7 +142,7 @@ li {
 }
 
 .card {
-  margin: 10px 0;
+  margin: 10px 5px;
   width: 260px;
   height: 90%;
   padding: 20px;

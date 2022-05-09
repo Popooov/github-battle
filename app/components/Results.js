@@ -31,16 +31,6 @@ function ProfileList({ profile }) {
                     </Tooltip>
                 </li>
             )}
-            {profile.blog && (
-                <li>
-                    <Tooltip text={profile.blog}>
-                        <FaCode color='rgb(66, 245, 203)' size={22} />
-                        <a href={profile.blog} target='_blank'>
-                            User's Blog
-                        </a>
-                    </Tooltip>
-                </li>
-            )}
             <li>
                 <FaUsers color='rgb(129, 195, 245)' size={22} />
                 {profile.followers.toLocaleString()} followers
@@ -119,7 +109,7 @@ export default function Results({ location }) {
                 <Card
                     header={winner.score === loser.score ? 'Tie' : 'Loser'}
                     avatar={loser.profile.avatar_url}
-                    subheader={`Score: ${winner.score.toLocaleString()}`}
+                    subheader={`Score: ${loser.score.toLocaleString()}`}
                     href={loser.profile.html_url}
                     name={loser.profile.login}
                 >
