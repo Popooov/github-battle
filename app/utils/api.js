@@ -2,7 +2,7 @@ const id = "YOUR_CLIENT_ID"
 const sec = "YOUR_SECRET_ID"
 const params = `?client_id=${id}&client_secret=${sec}`
 
-function getErrorMsg (message, username) {
+const getErrorMsg = (message, username) => {
   if (message === 'Not Found') {
     return `${username} doesn't exist`
   }
@@ -10,7 +10,7 @@ function getErrorMsg (message, username) {
   return message
 }
 
-async function getProfile (username) {
+const getProfile = async (username) => {
   const res = await fetch(`https://api.github.com/users/${username}${params}`)
   const profile = await res.json()
   if (profile.message) {
@@ -19,7 +19,7 @@ async function getProfile (username) {
   return profile
 }
 
-async function getRepos (username) {
+const getRepos = async (username) => {
   const res = await fetch(`https://api.github.com/users/${username}/repos${params}&per_page=100`)
   const repos = await res.json()
   if (repos.message) {
@@ -28,15 +28,11 @@ async function getRepos (username) {
   return repos
 }
 
-function getStarCount (repos) {
-  return repos.reduce((count, { stargazers_count }) => count + stargazers_count , 0)
-}
+const getStarCount = (repos) => repos.reduce((count, { stargazers_count }) => count + stargazers_count , 0)
 
-function calculateScore (followers, repos) {
-  return (followers * 3) + getStarCount(repos)
-}
+const calculateScore = (followers, repos) => (followers * 3) + getStarCount(repos)
 
-async function getUserData (player) {
+const getUserData = async (player) => {
   const [profile, repos] = await Promise.all([
     getProfile(player),
     getRepos(player)
@@ -47,11 +43,9 @@ async function getUserData (player) {
   })
 }
 
-function sortPlayers (players) {
-  return players.sort((a, b) => b.score - a.score)
-}
+const sortPlayers = (players) => players.sort((a, b) => b.score - a.score)
 
-export async function battle (players) {
+export const battle = async (players) => {
   const results = await Promise.all([
     getUserData(players[0]),
     getUserData(players[1])
@@ -59,7 +53,7 @@ export async function battle (players) {
   return sortPlayers(results)
 }
 
-export async function fetchPopularRepos (language) {
+export const fetchPopularRepos = async (language) => {
   const endpoint = window.encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`)
 
   const res = await fetch(endpoint)
